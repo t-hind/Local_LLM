@@ -12,7 +12,7 @@ A privacy-first Python LLM service that runs entirely on your machine. It uses a
    python -m pip install -r requirements.txt
    ```
 
-2. Put a compatible instruct-tuned `.gguf` model at `models/model.gguf`. Download this file separately before going offline, or point to another local file with `LOCAL_LLM_MODEL`.
+2. Put the Qwen3 model at `models/Qwen3-8B-Q4_K_M.gguf`. Download this file separately before going offline, or point to another local file with `LOCAL_LLM_MODEL`.
 
 3. Start the server:
 

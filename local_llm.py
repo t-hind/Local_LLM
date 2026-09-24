@@ -126,7 +126,11 @@ def make_handler(model: LocalModel) -> type[BaseHTTPRequestHandler]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run a private local LLM server or one-shot prompt.")
-    parser.add_argument("--model", type=Path, default=Path(os.getenv("LOCAL_LLM_MODEL", "models/model.gguf")))
+    parser.add_argument(
+        "--model",
+        type=Path,
+        default=Path(os.getenv("LOCAL_LLM_MODEL", "models/Qwen3-8B-Q4_K_M.gguf")),
+    )
     parser.add_argument("--host", default=os.getenv("LOCAL_LLM_HOST", "127.0.0.1"))
     parser.add_argument("--port", type=int, default=int(os.getenv("LOCAL_LLM_PORT", "8000")))
     parser.add_argument("--context-size", type=int, default=int(os.getenv("LOCAL_LLM_CONTEXT", "4096")))
