@@ -12,7 +12,7 @@ from typing import Any
 
 DEFAULT_SYSTEM_PROMPT = (
     "You are a helpful assistant. Answer clearly and concisely. "
-    "Do not claim to have accessed the internet."
+    "Do not claim to have accessed the internet. /no_think"
 )
 
 
@@ -71,13 +71,15 @@ class LocalModel:
         if not 0 <= temperature <= 2:
             raise ValueError("temperature must be between 0 and 2")
 
-        result = self._load()(
-            build_prompt(system_prompt, user_prompt),
+        result = self._load().create_chat_completion(
+            messages=[
+                {"role": "system", "content": system_prompt.strip()},
+                {"role": "user", "content": user_prompt.strip()},
+            ],
             max_tokens=max_tokens,
             temperature=temperature,
-            stop=["<|user|>", "<|system|>"],
         )
-        return str(result["choices"][0]["text"]).strip()
+        return str(result["choices"][0]["message"]["content"]).strip()
 
 
 def make_handler(model: LocalModel) -> type[BaseHTTPRequestHandler]:

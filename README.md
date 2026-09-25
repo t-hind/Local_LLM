@@ -17,17 +17,31 @@ A privacy-first Python LLM service that runs entirely on your machine. It uses a
 3. Start the server:
 
    ```powershell
-   python local_llm.py
+   .\.venv\Scripts\python.exe local_llm.py
    ```
 
 The server binds to `127.0.0.1` only. Check it with `http://127.0.0.1:8000/health`.
 
 ## Use
 
+Interactive conversation from a separate terminal:
+
+```powershell
+python chat_client.py
+```
+
+Type messages at the `You:` prompt. Type `/exit` to quit or `/clear` to start a new conversation. The client keeps the conversation history locally and sends it to the local server with each request.
+
 One-shot CLI:
 
 ```powershell
 python local_llm.py --prompt "Explain recursion in one paragraph."
+```
+
+Query from PowerShell without using the interactive `You:` prompt:
+
+```powershell
+.\.venv\Scripts\python.exe chat_client.py "What is machine learning?"
 ```
 
 HTTP request:
